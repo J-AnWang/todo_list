@@ -1,0 +1,18 @@
+<div>
+    <%= form_for @task do |f|%>
+        <div>
+            <%= f.label :name, "Name" %>
+            <%= f.text_field :name%>
+        </div>
+        <div>
+            <%= f.label :date, "Date" %>
+            <%= f.text_field :date%>
+        </div>
+        <div>
+            <%= f.label :note, "Note" %>
+            <%= f.text_area :note%>
+        </div>
+        <%= f.submit %>
+    <% end %>
+    <%= link_to "Back to index", tasks_path%>
+</div>
