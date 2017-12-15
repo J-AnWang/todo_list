@@ -8,35 +8,25 @@
     </tr>
     <% @tasks.each do |t| %>
         <tr>
+            <!-- 狀態，編輯以及刪除的按鈕放入helper，是不要有判斷的工作在view進行 -->
             <td>
-                <% if t.status == false %>
-                    <%= link_to check_task_path(t), method: :post, status: :true do %>
-                    <i class="fa fa-square-o" aria-hidden="true"></i>
-                <% end %>
-            <% else %>
-                <%= link_to check_task_path(t.id), method: :post, status: :false do %>
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-            <% end %>
-        <% end %>
-    </td>
-    <td>
-        <%= link_to t.name, task_path(t) %>
-    </td>
-    <td>
-        <%= t.date%>
-    </td>
-    <td>
-        <%= link_to edit_task_path(t) do%>
-        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-    <%end%>
-    </td>
-    <td>
-        <%= link_to task_path(t), method: :delete, date:{confirm: "Are you sure?"} do%>
-        <i class="fa fa-times" aria-hidden="true"></i>
-    <%end%>
-    </td>
-</tr>
-<% end %>
+                <%= todo_check_button(t)%>
+            </td>
+            <!--task name 包含了shoㄊ功能  -->
+            <td>
+                <%= link_to t.name, task_path(t) %>
+            </td>
+            <td>
+                <%= t.date%>
+            </td>
+            <td>
+                <%= todo_edit_button(t) %>
+            </td>
+            <td>
+                <%= todo_delete_button(t) %>
+            </td>
+        </tr>
+    <% end %>
 </table>
 
 <%= link_to 'New Task', new_task_path%>
