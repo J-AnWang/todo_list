@@ -28,4 +28,5 @@ module TasksHelper
             edit_button.html_safe
         end
     end
+
 end

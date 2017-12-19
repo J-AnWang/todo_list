@@ -9,9 +9,12 @@ class TasksController < ApplicationController
 
     def create
       @task = Task.new(task_params)
-      @task.save
-
-      redirect_to action: :index
+      if @task.save
+          flash[:notice] = 'Successfully Created'
+          redirect_to action: :index
+      else
+          render :new
+      end
     end
 
     def show
@@ -24,9 +27,15 @@ class TasksController < ApplicationController
 
     def update
       @task = Task.find(params[:id])
-      @task.update_attributes(task_params)
+      if @task.update_attributes(task_params)
+          flash[:notice] = 'Successfully Updated'
+          redirect_to tasks_path(@task)
+      else
+          render :edit
+      end
 
-      redirect_to tasks_path(@task)
+
+
     end
 
     def destroy
