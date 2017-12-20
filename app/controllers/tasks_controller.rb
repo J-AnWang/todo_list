@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+    before_action :find_params, only: [:show, :edit, :update, :check]
+
     def index
       @tasks = Task.order(date: :asc)
     end
@@ -18,36 +20,28 @@ class TasksController < ApplicationController
     end
 
     def show
-      @task = Task.find(params[:id])
     end
 
     def edit
-      @task = Task.find(params[:id])
     end
 
     def update
-      @task = Task.find(params[:id])
       if @task.update_attributes(task_params)
           flash[:notice] = 'Successfully Updated'
           redirect_to tasks_path(@task)
       else
           render :edit
       end
-
-
-
     end
 
     def destroy
       @task = Task.find(params[:id])
       @task.destroy
-
+      flash[:notice] = 'Successfully Deleted'
       redirect_to tasks_url
     end
 
     def check
-      @task = Task.find(params[:id])
-
       if @task.status == false
           @task.status = true
           @task.update_attributes(check_update)
@@ -67,5 +61,9 @@ class TasksController < ApplicationController
 
     def check_update
       params.permit(:status)
+    end
+
+    def find_params
+      @task = Task.find(params[:id])
     end
 end

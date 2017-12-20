@@ -23,7 +23,7 @@
                 <%= todo_edit_button(t) %>
             </td>
             <td>
-                <%= todo_delete_button(t) %>
+                <%= overdue?(t) %>
             </td>
         </tr>
     <% end %>

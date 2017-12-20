@@ -22,11 +22,16 @@ module TasksHelper
         end
     end
     # todo_delete_button是delete的helper，使用在index.html.erb
-    def todo_delete_button(t)
-        link_to task_path(t), method: :delete, date: { confirm: 'Are you sure?' } do
-            edit_button = '<i class="fa fa-times" aria-hidden="true"></i>'
-            edit_button.html_safe
-        end
+    def overdue?(t)
+      if t.date < Date.today
+          edit_button = '<i class="fa fa-times" aria-hidden="true" style="color: grey" title="Overdue"></i>'
+          edit_button.html_safe
+      else
+          link_to task_path(t), method: :delete, data: { confirm: 'Are you sure?' } do
+              edit_button = '<i class="fa fa-times" aria-hidden="true"></i>'
+              edit_button.html_safe
+          end
+      end
     end
 
 end
