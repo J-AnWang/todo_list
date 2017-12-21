@@ -1,32 +1,36 @@
-<table>
-    <tr>
-        <th>Status</th>
-        <th>Task</th>
-        <th>Deadline</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    <% @tasks.each do |t| %>
+<div class="container table-responsive">
+    <h1>To do list</h1>
+    <table class="table table-hover table-condensed">
         <tr>
-            <!-- 狀態，編輯以及刪除的按鈕放入helper，是不要有判斷的工作在view進行 -->
-            <td>
-                <%= todo_check_button(t)%>
-            </td>
-            <!--task name 包含了shoㄊ功能  -->
-            <td>
-                <%= link_to t.name, task_path(t) %>
-            </td>
-            <td>
-                <%= t.date%>
-            </td>
-            <td>
-                <%= todo_edit_button(t) %>
-            </td>
-            <td>
-                <%= overdue?(t) %>
-            </td>
+            <th>Status</th>
+            <th>Task</th>
+            <th>Deadline</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
-    <% end %>
-</table>
+        <% @tasks.each do |t| %>
+            <tr>
+                <!-- 狀態，編輯以及刪除的按鈕放入helper，是不要有判斷的工作在view進行 -->
+                <td>
+                    <%= todo_check_button(t)%>
+                </td>
+                <!--task name 包含了shoㄊ功能  -->
+                <td>
+                    <%= link_to t.name, task_path(t), class: "link"%>
+                </td>
+                <td>
+                    <%= t.date%>
+                </td>
+                <td>
+                    <%= todo_edit_button(t) %>
+                </td>
+                <td>
+                    <%= overdue?(t) %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
 
-<%= link_to 'New Task', new_task_path%>
+    <%= link_to 'New Task', new_task_path, class: "btn btn-info btn-lg"%>
+
+</div>
